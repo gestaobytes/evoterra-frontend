@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  evoterra:
+    image: nuxt
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nuxt_evoterra
+    restart: always
+    volumes:
+      - ./src:/evoterra/src:rw
+    ports:
+      - "3000:3000"
