@@ -8,22 +8,23 @@
 </template>
 
 <script>
+import { company } from "@/global.js";
 
-  import Nav from "@/components/Nav";
-  import PageHeader from "@/components/PageHeader";
-  import ServiceDetail from "@/components/ServiceDetail";
-  import Footer from "@/components/Footer";
-  export default {
-    components: {
-      Footer,
-      ServiceDetail,
-      PageHeader,
-      Nav
-    },
-    head(){
-      return {
-        title: "evoterra  | Service Detail"
-      }
-    }
-  }
+import NavHeader from "@/components/NavHeader.vue";
+import PageHeader from "@/components/PageHeader.vue";
+import ServiceDetail from "@/components/ServiceDetail.vue";
+import Footer from "@/components/Footer.vue";
+export default {
+  components: {
+    NavHeader,
+    PageHeader,
+    ServiceDetail,
+    Footer,
+  },
+  head() {
+    return {
+      title: `Detalhes | ${company}`,
+    };
+  },
+};
 </script>

@@ -116,10 +116,8 @@
 </template>
 
 <script>
-import FaqOne from "./FaqOne";
 export default {
   name: "ServiceDetail",
-  components: { FaqOne },
 };
 </script>
 

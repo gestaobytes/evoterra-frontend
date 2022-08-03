@@ -4,9 +4,9 @@
       <div class="container-box">
         <div class="topbar_three_content clearfix">
           <div class="logo-box-three float-left">
-            <a href="/index3" class="main-nag__logo">
+            <nuxt-link to="/" class="main-nag__logo">
               <img src="@/static/images/resources/logo-2.png" alt="" />
-            </a>
+            </nuxt-link>
           </div>
 
           <div class="topbar_three_nav_box float-left">
@@ -85,8 +85,6 @@
       class="mobile-nav__container"
       :style="`display: ${mobileToggle ? 'block' : 'none'}`"
     >
-      <!-- content is loading via js -->
-
       <ul class="main-nav__navigation-box">
         <li class="dropdown current">
           <div class="menu-holder">
@@ -95,99 +93,36 @@
             </button>
           </div>
           <ul>
-            <li><nuxt-link to="/">Home 01</nuxt-link></li>
-            <li><nuxt-link to="/index2">Home 02</nuxt-link></li>
-            <li><nuxt-link to="/index3">Home 03</nuxt-link></li>
-            <li><nuxt-link to="/index4">Home 04</nuxt-link></li>
-            <li><nuxt-link to="/index5">Home 05</nuxt-link></li>
-            <li class="dropdown">
-              <div class="menu-holder">
-                Header Versions<button class="dropdown-btn">
-                  <i class="fa fa-angle-right"></i>
-                </button>
-              </div>
-              <ul>
-                <li><nuxt-link to="/">Header 01</nuxt-link></li>
-                <li><nuxt-link to="/index2">Header 02</nuxt-link></li>
-                <li><nuxt-link to="/index3">Header 03</nuxt-link></li>
-                <li><nuxt-link to="/index4">Header 04</nuxt-link></li>
-                <li><nuxt-link to="/index5">Header 05</nuxt-link></li>
-              </ul>
-              <!-- /.sub-menu -->
-            </li>
+            <li><nuxt-link to="/">Home</nuxt-link></li>
           </ul>
-          <!-- /.sub-menu -->
         </li>
         <li class="dropdown">
           <div class="menu-holder">
-            Services<button class="dropdown-btn">
+            Empresa<button class="dropdown-btn">
               <i class="fa fa-angle-right"></i>
             </button>
           </div>
           <ul>
-            <li><nuxt-link to="/servicos">Services</nuxt-link></li>
             <li>
-              <nuxt-link to="/service-detail">Services Detail</nuxt-link>
+              <nuxt-link to="/sobre-nos">Sobre nós</nuxt-link>
             </li>
-          </ul>
-          <!-- /.sub-menu -->
-        </li>
-        <li class="dropdown">
-          <div class="menu-holder">
-            Our Projects<button class="dropdown-btn">
-              <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-          <ul>
-            <li><nuxt-link to="/projects">Projects</nuxt-link></li>
             <li>
-              <nuxt-link to="/projects_detail">Projects Detail</nuxt-link>
+              <nuxt-link
+                :to="{ path: '/sobre-nos', hash: 'team' }"
+                v-scroll-to="{ el: '#team' }"
+                >Colaboradores</nuxt-link
+              >
             </li>
           </ul>
-          <!-- /.sub-menu -->
-        </li>
-        <li class="dropdown">
-          <div class="menu-holder">
-            Shop<button class="dropdown-btn">
-              <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-          <ul>
-            <li><nuxt-link to="/product">Products</nuxt-link></li>
-            <li><nuxt-link to="/product-detail">Product Detail</nuxt-link></li>
-            <li><nuxt-link to="/cart">Cart</nuxt-link></li>
-            <li><nuxt-link to="/checkout">Checkout</nuxt-link></li>
-          </ul>
-          <!-- /.sub-menu -->
-        </li>
-        <li class="dropdown">
-          <div class="menu-holder">
-            Pages<button class="dropdown-btn">
-              <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-          <ul>
-            <li><nuxt-link to="/sobre-nos">About</nuxt-link></li>
-            <li><nuxt-link to="/why_choose_us">Why Choose Us</nuxt-link></li>
-            <li><nuxt-link to="/farmers">Farmers</nuxt-link></li>
-            <li><nuxt-link to="/gallery">Gallery</nuxt-link></li>
-          </ul>
-          <!-- /.sub-menu -->
-        </li>
-        <li class="dropdown">
-          <div class="menu-holder">
-            News<button class="dropdown-btn">
-              <i class="fa fa-angle-right"></i>
-            </button>
-          </div>
-          <ul>
-            <li><nuxt-link to="/news">News</nuxt-link></li>
-            <li><nuxt-link to="/news_detail">News Details</nuxt-link></li>
-          </ul>
-          <!-- /.sub-menu -->
         </li>
         <li>
-          <nuxt-link to="/contact">Contact</nuxt-link>
+          <nuxt-link to="/servicos">Serviços</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/blog">Blog</nuxt-link>
+        </li>
+        <li>
+          <a href="#">Contato</a>
         </li>
       </ul>
     </nav>

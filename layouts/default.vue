@@ -1,16 +1,12 @@
 <template>
   <div class="page-wrapper">
     <nuxt />
-    <SearchPopup />
   </div>
 </template>
 
 <script>
-import SearchPopup from "@/components/SearchPopup";
 export default {
-  components: {
-    SearchPopup,
-  },
+  components: {},
   mounted() {
     this.$nextTick(() => {
       this.$nuxt.$loading.start();

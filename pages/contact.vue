@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Nav />
-    <PageHeader title="Contact" />
+    <NavHeader />
+    <PageHeader title="Contato" />
     <Location />
     <ContactTwo />
     <GMap />
@@ -10,26 +10,29 @@
 </template>
 
 <script>
+import { company } from "@/global.js";
 
-  import Nav from "@/components/Nav";
-  import PageHeader from "@/components/PageHeader";
-  import Footer from "@/components/Footer";
-  import Location from "@/components/Location";
-  import ContactTwo from "@/components/ContactTwo";
-  import GMap from "@/components/GMap";
-  export default {
-    components: {
-      GMap,
-      ContactTwo,
-      Location,
-      Footer,
-      PageHeader,
-      Nav
-    },
-    head(){
-      return {
-        title: "evoterra  | Contact"
-      }
-    }
-  }
+import NavHeader from "@/components/NavHeader.vue";
+import PageHeader from "@/components/PageHeader.vue";
+import Location from "@/components/Location.vue";
+import ContactTwo from "@/components/ContactTwo.vue";
+import GMap from "@/components/GMap.vue";
+import Footer from "@/components/Footer.vue";
+
+
+export default {
+  components: {
+    NavHeader,
+    PageHeader,
+    Location,
+    ContactTwo,
+    GMap,
+    Footer,
+  },
+  head() {
+    return {
+      title: `Contato | ${company}`,
+    };
+  },
+};
 </script>
