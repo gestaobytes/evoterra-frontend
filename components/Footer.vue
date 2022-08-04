@@ -108,14 +108,13 @@
                 <h3>Contatos</h3>
               </div>
               <div class="footer-widget_contact">
-                <p>Avenida Tocantins<br />Balsas-MA</p>
+                <p>Rua Natal, Setor Industrial<br />Balsas-MA</p>
                 <a href="mailto:contato@evoterra.com">contato@evoterra.com</a
                 ><br />
-                <a href="tel:777-888-0000">777 888 0000</a>
+                <a href="tel:(99)98222-2349">(99)98222-2349</a> | <a href="tel:(99)98195-4058">(99)98195-4058</a>
                 <div class="site-footer__social">
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="https://www.facebook.com/Evoterra-Consultoria-Agron%C3%B4mica-504788166323947"><i class="fab fa-facebook-f"></i></a>
+                  <a href="https://www.instagram.com/evoterra_consultoriaa/"><i class="fab fa-instagram"></i></a>
                 </div>
               </div>
             </div>
@@ -123,20 +122,6 @@
         </div>
       </div>
     </footer>
-    <!-- <div class="site-footer_bottom">
-        <div class="container">
-          <div class="site-footer_bottom_copyright">
-            <p>@ All copyright 2022, <a href="#">Gestão Bytes</a></p>
-          </div>
-          <div class="site-footer_bottom_menu">
-            <ul class="list-unstyled">
-              <li><a href="#">Política de Privacidade</a></li>
-              <li><a href="#">Termos de Uso</a></li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
-
     <a
       @click="scrollTop"
       href="#"

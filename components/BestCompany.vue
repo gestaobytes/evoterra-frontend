@@ -11,7 +11,7 @@
           <div class="company_content">
             <div class="block-title text-left">
               <p>nossos valores</p>
-              <h3>Valores que nossa empresa não abre mão</h3>
+              <h3>Valores que não abrimos mão</h3>
               <div class="leaf">
                 <img src="@/static/images/resources/leaf.png" alt="" />
               </div>

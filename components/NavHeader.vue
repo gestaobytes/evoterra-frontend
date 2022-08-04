@@ -69,9 +69,9 @@
 
           <div class="topbar_three_right_box">
             <div class="topbar-one__social home-four">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.facebook.com/Evoterra-Consultoria-Agron%C3%B4mica-504788166323947"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.instagram.com/evoterra_consultoriaa/"><i class="fab fa-instagram"></i></a>
+              <!-- <a href="#"><i class="fab fa-twitter"></i></a> -->
               <nuxt-link to="/login">
                 <i class="fab fa-dribbble"></i
               ></nuxt-link>
