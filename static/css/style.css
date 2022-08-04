@@ -36,12 +36,17 @@
 # Common
 --------------------------------------------------------------*/
 
-/*font-family: 'Barlow', sans-serif;
-font-family: 'Amatic SC', cursive;*/
+@font-face {
+  font-family: "ARLON-SEMIBOLD";
+  src: local("ARLON-SEMIBOLD"), 
+  url(../fonts/ARLON-SEMIBOLD.ttf)
+  format("truetype");
+}
 
 :root {
+  --thm-font-title: "ARLON-SEMIBOLD", sans-serif;
   --thm-font: "Barlow", sans-serif;
-  --heading-font: "Barlow", cursive;
+  --heading-font: "ARLON-SEMIBOLD", cursive;
   --thm-base: #C1E976;
   --thm-base-rgb: 237, 221, 94;
   --thm-primary: #547606;
@@ -104,6 +109,7 @@ h6 {
 .block-title {
   margin-bottom: 60px;
   margin-top: -6px;
+  letter-spacing: -4px;
 }
 
 .block-title p {
@@ -2405,12 +2411,14 @@ h6 {
 }
 
 .banner-carousel-two .content-box .big_text {
+  font-family: var(--heading-font);
   position: relative;
   display: block;
   margin-bottom: 40px;
 }
 
 .banner-carousel-two .content-box .big_text h2 {
+  font-family: var(--heading-font);
   position: relative;
   display: inline-block;
   margin: 0;
@@ -2429,6 +2437,7 @@ h6 {
 }
 
 .banner-carousel-two .content-box .big_text h2:before {
+  font-family: var(--heading-font);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -2440,6 +2449,7 @@ h6 {
 }
 
 .banner-carousel-two .active .content-box .big_text h2 {
+  font-family: var(--heading-font);
   opacity: 1;
   -webkit-transform: translate(0);
   -moz-transform: translate(0);
@@ -2648,12 +2658,14 @@ h6 {
 }
 
 .banner-carousel-three .content-box .big_text {
+  font-family: var(--heading-font);
   position: relative;
   display: block;
   margin-bottom: 40px;
 }
 
 .banner-carousel-three .content-box .big_text h2 {
+  font-family: var(--heading-font);
   position: relative;
   display: inline-block;
   margin: 0;
@@ -2673,6 +2685,7 @@ h6 {
 }
 
 .banner-carousel-three .content-box .big_text h2:before {
+  font-family: var(--heading-font);
   position: absolute;
   left: 0;
   bottom: -57px;
@@ -2685,6 +2698,7 @@ h6 {
 }
 
 .banner-carousel-three .active .content-box .big_text h2 {
+  font-family: var(--heading-font);
   opacity: 1;
   -webkit-transform: translate(0);
   -moz-transform: translate(0);
