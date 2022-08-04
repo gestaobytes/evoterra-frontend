@@ -2,8 +2,8 @@
   <section class="team_one">
     <div class="container">
       <div class="block-title text-center">
-        <p>time evoterra</p>
-        <h3>nossa equipe</h3>
+        <p>TIME EVOTERRA</p>
+        <h3>Nossa Equipe</h3>
         <div class="leaf">
           <img src="@/static/images/resources/leaf.png" alt="" />
         </div>

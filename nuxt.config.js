@@ -182,9 +182,9 @@ export default {
     viewer: true,
   },
 
-  watchers: {
-    webpack: {
-      poll: true
-    }
-  }
+  // watchers: {
+  //   webpack: {
+  //     poll: true
+  //   }
+  // }
 }

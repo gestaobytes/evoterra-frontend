@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-xl-6 col-lg-6">
           <div class="block-title text-left">
-            <p>Bem vindo ao futuro</p>
-            <h3>MUITO PRAZER, SOMOS A EVOTERRA</h3>
+            <p>BEM VINDO AO FUTURO</p>
+            <h3>Muito prazer, somos a EVOTERRA</h3>
             <div class="leaf">
               <img src="@/static/images/resources/leaf.png" alt="" />
             </div>
