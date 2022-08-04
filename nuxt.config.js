@@ -180,5 +180,11 @@ export default {
     config: {},
     injectPosition: 0,
     viewer: true,
+  },
+
+  watchers: {
+    webpack: {
+      poll: true
+    }
   }
 }

@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: nuxt_evoterra
+    container_name: site_evoterra
     restart: always
     volumes:
       - ./src:/evoterra/src:rw
