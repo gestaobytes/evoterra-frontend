@@ -17,14 +17,6 @@
             >
               <div class="container">
                 <div class="main_nav_header_three_content clearfix">
-                  <div class="mobile_menu_icon_three">
-                    <a href="#" class="side-menu__toggler">
-                      <i
-                        @click="mobileToggle = !mobileToggle"
-                        class="fa fa-bars"
-                      ></i>
-                    </a>
-                  </div>
                   <div class="main-nav__main-navigation three float-left">
                     <img
                       src="@/static/images/resources/logo-horizontal.webp"
@@ -69,12 +61,31 @@
 
           <div class="topbar_three_right_box">
             <div class="topbar-one__social home-four">
-              <a href="https://www.facebook.com/Evoterra-Consultoria-Agron%C3%B4mica-504788166323947"><i class="fab fa-facebook-f"></i></a>
-              <a href="https://www.instagram.com/evoterra_consultoriaa/"><i class="fab fa-instagram"></i></a>
+              <a
+                href="https://www.facebook.com/Evoterra-Consultoria-Agron%C3%B4mica-504788166323947"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://www.instagram.com/evoterra_consultoriaa/"
+                ><i class="fab fa-instagram"></i
+              ></a>
               <!-- <a href="#"><i class="fab fa-twitter"></i></a> -->
               <nuxt-link to="/login">
                 <i class="fab fa-dribbble"></i
               ></nuxt-link>
+
+              <a aria-label="Open Menu" @click="drawer">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  class="w-6 h-6"
+                >
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -138,10 +149,25 @@ export default {
       mobileToggle: false,
     };
   },
+  // computed: {
+  //   drawer: {
+  //     get() {
+  //       return this.$store.state.drawer.show;
+  //     },
+  //     set(val) {
+  //       this.$store.dispatch("drawer/SET_DRAWER", val);
+  //     },
+  //   },
+  // },
+
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
+    drawer() {
+      this.$store.dispatch("drawer/SET_DRAWER", !this.$store.state.drawer.show);
+    },
+
     handleScroll() {
       if (window.scrollY > 70) {
         this.sticky = true;

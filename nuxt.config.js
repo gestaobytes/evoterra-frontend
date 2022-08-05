@@ -127,7 +127,7 @@ export default {
   ],
 
   router: {
-    middleware: ['clearValidationErrors']
+    middleware: ['clearValidationErrors','closeDrawer']
   },
 
   components: true,
