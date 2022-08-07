@@ -71,7 +71,7 @@
 
 <script>
 import axios from "axios";
-import crud from "@/components/api/_crud";
+import crud from "@/components/api/crud";
 import { keyApplicationGB, urlApi, company } from "@/global";
 import {
   required,

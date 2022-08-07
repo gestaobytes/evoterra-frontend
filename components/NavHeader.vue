@@ -72,6 +72,9 @@
               <nuxt-link to="/login">
                 <i class="fab fa-dribbble"></i
               ></nuxt-link>
+              <nuxt-link to="/admin">
+                <i class="fab fa-user"></i
+              ></nuxt-link>
 
               <a aria-label="Open Menu" @click="drawer">
                 <svg

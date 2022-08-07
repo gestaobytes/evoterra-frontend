@@ -1,25 +1,48 @@
 <template>
   <div>
-    <AdminHeader />
+    <NavBar />
     <div class="py-6 px-6">
       <nuxt />
     </div>
-    <AdminBottom class="sm:invisible md:invisible lg:invisible xl:md:invisible" />
+    <NavBottom
+      v-if="isXs"
+      class="sm:invisible md:invisible lg:invisible xl:md:invisible"
+    />
+    <NavSidebar />
   </div>
 </template>
 
 <script>
-import AdminHeader from "@/components/layout/AdminHeader.vue";
-import AdminBottom from "@/components/layout/AdminBottom.vue";
+import NavBar from '@/components/layout/admin/NavBar.vue'
+import NavSidebar from '@/components/layout/admin/NavSidebar.vue'
+import NavBottom from '@/components/layout/admin/NavBottom.vue'
 export default {
-  name: "restrict",
+  name: 'LayoutRestrict',
   // middleware: ["guest"],
   components: {
-    AdminHeader,
-    AdminBottom,
+    NavBar,
+    NavBottom,
+    NavSidebar,
   },
   data() {
-    return {};
+    return {}
+  },
+  computed: {
+    isXs() {
+      return this.$breakpoints.xs
+    },
+    isSm() {
+      return this.$breakpoints.sm
+    },
+    isMd() {
+      return this.$breakpoints.md
+    },
+    isLg() {
+      return this.$breakpoints.lg
+    },
+    isXl() {
+      return this.$breakpoints.xl
+    },
   },
 
   // mounted() {
@@ -29,5 +52,5 @@ export default {
   //     this.$store.dispatch("auth-user/SET_USER_LOGGED", false);
   //   }
   // },
-};
+}
 </script>
