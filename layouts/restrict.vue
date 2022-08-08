@@ -9,7 +9,6 @@
       class="sm:invisible md:invisible lg:invisible xl:md:invisible"
     />
     <NavSidebar />
-    <!-- . -->
   </div>
 </template>
 
