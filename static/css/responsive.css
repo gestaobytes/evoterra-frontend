@@ -1249,9 +1249,7 @@
     }
 
     /** Header Three Wrap**/
-    .topbar_three_right_box {
-        display: none;
-    }
+
     .main_nav_right_three {
         display: none;
     }
@@ -1285,9 +1283,7 @@
     }
 
     /** Header Five Wrap**/
-    .topbar_three_right_box {
-        display: none;
-    }
+
     .main_nav_right_three.five {
         display: none;
     }
@@ -1554,9 +1550,7 @@
 }
 
 @media (max-width: 1280px) {
-    .topbar_three_right_box {
-        display: none;
-    }
+
     .main_nav_header_three_content .main-nav__main-navigation {
         float: none !important;
     }

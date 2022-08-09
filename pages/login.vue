@@ -22,9 +22,9 @@
       <form @submit.prevent="userLogin">
         <div>
           <AlertError
-            v-if="errors == 'Unauthorized'"
-            titleError="Credenciais inválidas"
-            textError="Usuário ou senha inválidos"
+            v-if="showError"
+            :titleError="titleError"
+            :textError="textError"
           />
 
           <FormInput
@@ -51,13 +51,17 @@
         </div>
         <div class="mt-8">
           <button
-            :disabled="this.$v.form.$invalid"
+            :disabled="this.$v.form.$invalid || loadingBtn==true"
             type="submit"
             :loading="loadingBtn"
             class="text-white border rounded py-3 w-full uppercase"
-            :class="this.$v.form.$invalid ? 'bg-gray-200' : 'bg-lime-500'"
+            :class="(this.$v.form.$invalid || loadingBtn==true) ? 'bg-gray-200' : 'bg-lime-500'"
           >
             {{ this.$v.form.$invalid ? "Preencha o Formulário" : "Entrar" }}
+            <i
+              v-if="loadingBtn == true"
+              class="ml-4 text-lg fas fa-spinner animate-spin"
+            ></i>
           </button>
         </div>
       </form>
@@ -67,7 +71,7 @@
 
 <script>
 import axios from "axios";
-import crud from "@/components/api/_crud";
+import crud from "@/components/api/crud";
 import { keyApplicationGB, urlApi, company } from "@/global";
 import {
   required,
@@ -90,6 +94,9 @@ export default {
   data() {
     return {
       loadingBtn: false,
+      showError: false,
+      titleError: "",
+      textError: "",
       form: {
         email: "",
         password: "",
@@ -117,7 +124,6 @@ export default {
       if (!this.$v.form.$invalid) {
         this.login();
       } else {
-        this.loadingBtn = false;
         console.log("❌ Invalid form");
       }
     },
@@ -128,13 +134,36 @@ export default {
           data: this.form,
         })
         .then((res) => {
-          // console.log(res);
           const user = res.data.data;
           this.$auth.setUser(user);
           this.$router.push({ name: "admin" });
         })
         .catch((err) => {
-          console.log(err.response);
+          this.showError = true;
+
+          if (err.response.status == 401) {
+            this.titleError = "Credenciais inválidas";
+            this.textError = "Usuário ou senha inválidos.";
+          } else if (err.response.status == 500) {
+            this.titleError = "Erro Interno";
+            this.textError =
+              "Houve um error interno no servidor. Por favor, acione a administração.";
+          } else if (err.response.status == 404) {
+            this.titleError = "Paginão não encontrada";
+            this.textError =
+              "A página de verificação foi alterada ou nã existe mais. Por favor, acione a administração.";
+          } else if (err.response.status == 400) {
+            this.titleError = "Conexão interrompida";
+            this.textError =
+              "A conexão do seu aparelho não está respondendo. Tente novamente.";
+          } else {
+            this.titleError = "Erro desconhecido";
+            this.textError =
+              "Ocorreu um erro desconhecido no sistema. Tente novamente mais tarde.";
+          }
+        })
+        .finally(() => {
+          this.loadingBtn = false;
         });
     },
 
@@ -143,11 +172,13 @@ export default {
     },
   },
 
-  // mounted() {
-  //   if (this.$auth.loggedIn) {
-  //     this.$router.push({ name: "admin" });
-  //   }
-  // },
+  mounted() {
+    this.showError = false;
+
+    if (this.$auth.loggedIn) {
+      this.$router.push({ name: "admin" });
+    }
+  },
 
   head() {
     return {
@@ -170,5 +201,17 @@ export default {
   margin-right: -2px;
   align-items: center;
   display: inline-flex;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
 </style>

@@ -27,10 +27,11 @@
         <div class="flex-grow items-center">
           <table width="100%">
             <tr>
-              <td width="50px" class="bg-yellow-200">
-                <a class="text-xl text-white pr-2 font-semibold" href="#"
-                  >Navbar</a
-                >
+              <td width="200px">
+                <img
+                  src="@/static/images/resources/logo-horizontal.webp"
+                  alt="Logo"
+                />
               </td>
               <td>
                 <NuxtLink
@@ -79,7 +80,7 @@
                   "
                   :to="{ name: 'index' }"
                 >
-                  {{dataUser.fullname}}
+                  {{ dataUser.fullname }}
                 </NuxtLink>
               </td>
               <td width="50px">
@@ -126,29 +127,35 @@ export default {
   },
 
   mounted() {
-    this.permissions = this.$auth.user.permissions;
-    this.dataUser = this.$auth.user.user[0];
+    // this.permissions = this.$auth.user.permissions;
+    // this.dataUser = this.$auth.user.user[0];
 
-    if (this.$auth.loggedIn == true) {
-      this.$store.dispatch("auth-user/SET_USER_LOGGED", true);
-    } else {
-      this.$store.dispatch("auth-user/SET_USER_LOGGED", false);
-    }
+    // if (this.$auth.loggedIn == true) {
+    //   this.$store.dispatch("auth-user/SET_USER_LOGGED", true);
+    // } else {
+    //   this.$store.dispatch("auth-user/SET_USER_LOGGED", false);
+    // }
+
+
+
+    
+
 
     // var menuUsers = [];
     // var menuService = [];
+    // const p = this.$auth.user.permissions;
+    // const isSuperADM = p.includes(`${adminSuper}`);
+    // if (isSuperADM || p.includes("users")) {
+    //   let menuRouteUsers = [
+    //     "mdi-account-multiple-outline",
+    //     "Usuários",
+    //     { name: "admin-users" },
+    //   ];
+    //   menuUsers.push(menuRouteUsers);
+    // }
 
-    const p = this.$auth.user.permissions;
-    const isSuperADM = p.includes(`${adminSuper}`);
 
-    if (isSuperADM || p.includes("users")) {
-      let menuRouteUsers = [
-        "mdi-account-multiple-outline",
-        "Usuários",
-        { name: "admin-users" },
-      ];
-      // menuUsers.push(menuRouteUsers);
-    }
+
   },
 };
 </script>

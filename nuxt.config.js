@@ -105,29 +105,33 @@ export default {
     height: '4px'
   },
 
-  css: [],
+  css: [
+    '@/assets/css/main.css',
+  ],
 
   plugins: [
     '~/plugins/axios',
     '~/plugins/mixins/validation',
     '~/plugins/vuelidate',
     '~/plugins/vuemask',
+    { src: '~/node_modules/tw-elements', mode: 'client' },
     {
       src: 'plugins/owl.js',
       ssr: false
     },
+    
   ],
 
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/tailwindcss',
+    // '@nuxtjs/tailwindcss',
     'nuxt-breakpoints',
     'vue-sweetalert2/nuxt',
   ],
 
   router: {
-    middleware: ['clearValidationErrors']
+    middleware: ['clearValidationErrors','closeDrawer']
   },
 
   components: true,
@@ -167,20 +171,29 @@ export default {
     },
   },
 
-  buildModules: [],
+  buildModules: [
+    '@nuxt/postcss8',
+  ],
   build: {
     extractCSS: true,
     extend(config, ctx) {},
+
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
   },
 
-  tailwindcss: {
-    cssPath: '~/css/tailwind.css',
-    configPath: 'tailwind.config.js',
-    exposeConfig: false,
-    config: {},
-    injectPosition: 0,
-    viewer: true,
-  },
+  // tailwindcss: {
+  //   cssPath: '~/css/tailwind.css',
+  //   configPath: 'tailwind.config.js',
+  //   exposeConfig: false,
+  //   config: {},
+  //   injectPosition: 0,
+  //   viewer: true,
+  // },
 
   // watchers: {
   //   webpack: {
