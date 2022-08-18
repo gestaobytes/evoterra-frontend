@@ -62,6 +62,9 @@ export default {
         this.limit = res.data.per_page
         this.paginate = Math.ceil((res.data.total) / (res.data.per_page))
         this.qtdRegisters = 0
+      }).catch(e => {
+        this.exibeMessage(e.response.status, e.response.data.errors);
+        this.msgErrors = e.response.data.errors;
       });
     },
 
@@ -70,32 +73,22 @@ export default {
       const uuid = this.dataOfTable.uuid ? `/${this.dataOfTable.uuid}` : "";
 
       if (method == "put") {
-        this.$axios.$put(`${urlApi}/${this.pageApi}${uuid}`, this.dataOfTable).then(() => {
-          this.$swal({
-            icon: 'success',
-            title: 'Registro Alterado!',
-            showConfirmButton: false,
-            timer: 2000
-          }),
-            this.reset(),
-            this.hideModal()
-        }).catch(error => {
+        axios.put(`${urlApi}/${this.pageApi}${uuid}`, this.dataOfTable).then((r) => {
+          this.exibeMessage(r.status, 'Registro Alterado!');
+          this.reset();
+          this.hideModal();
+        }).catch(e => {
+          this.exibeMessage(e.response.status, e.response.data.errors);
           this.msgErrors = e.response.data.errors;
-          console.log(error)
         })
       } else {
-        this.$axios.$post(`${urlApi}/${this.pageApi}${uuid}`, this.dataOfTable).then(() => {
-          this.$swal({
-            icon: 'success',
-            title: 'Registro Inserido!',
-            showConfirmButton: false,
-            timer: 2000
-          }),
-            this.reset(),
-            this.hideModal()
-        }).catch(error => {
+        axios.post(`${urlApi}/${this.pageApi}${uuid}`, this.dataOfTable).then((r) => {
+          this.exibeMessage(r.status, 'Registro Inserido!');
+          this.reset();
+          this.hideModal();
+        }).catch(e => {
+          this.exibeMessage(e.response.status, e.response.data.errors);
           this.msgErrors = e.response.data.errors;
-          console.log(error)
         })
       }
     },
@@ -114,50 +107,13 @@ export default {
       }).then(result => {
         const uuid = item.uuid;
         if (result.value) {
-          axios.delete(`${urlApi}/${this.pageApi}/${uuid}`).then(() => {
+          axios.delete(`${urlApi}/${this.pageApi}/${uuid}`).then((r) => {
             this.searching = false;
             this.loadRegistersOfTable();
-            this.$swal({
-              icon: 'success',
-              title: 'Registro removido.',
-              showConfirmButton: false,
-              timer: 2000
-            });
+            this.exibeMessage(r.status, 'Registro Excluído!');
           }).catch(error => {
-            let title;
-            let text;
-
-            if (error.response.status == 401) {
-              title = "Não logado";
-              text = "Você não tem permissão para excluir ou sua sessão expirou.";
-            } else if (error.response.status == 500) {
-              title = "Erro Interno";
-              text =
-                "Houve um error interno no servidor. Por favor, acione a administração.";
-            } else if (error.response.status == 404) {
-              title = "Paginão não encontrada";
-              text =
-                "A página de verificação foi alterada ou nã existe mais. Por favor, acione a administração.";
-            } else if (error.response.status == 400) {
-              title = "Conexão interrompida";
-              text =
-                "A conexão do seu aparelho não está respondendo. Tente novamente.";
-            } else {
-              title = "Erro desconhecido";
-              text =
-                "Ocorreu um erro desconhecido no sistema. Tente novamente mais tarde.";
-            }
-            this.$swal({
-              icon: 'warning',
-              title: title,
-              text: text,
-              showCloseButton: false,
-              showConfirmButton: false,
-            });
-
-
-
-
+            this.exibeMessage(e.response.status, e.response.data.errors);
+            this.msgErrors = e.response.data.errors;
           });
 
         } else {
@@ -187,6 +143,9 @@ export default {
           titleEditModal = this.titlePage;
         }
         this.titleModal = titleEditModal;
+      }).catch(e => {
+        this.exibeMessage(e.response.status, e.response.data.errors);
+        this.msgErrors = e.response.data.errors;
       });
     },
 
@@ -198,10 +157,11 @@ export default {
       this.loadRegistersOfTable();
     },
 
-    openModal(){
+    openModal() {
       this.dialog = true;
       this.$store.dispatch("modal/SET_MODAL", true);
     },
+
     closeModal() {
       this.dialog = false;
       this.$store.dispatch("modal/SET_MODAL", false);
@@ -213,9 +173,79 @@ export default {
       this.closeModal();
     },
 
-
     setDrawer() {
       this.drawer = !this.drawer;
+    },
+
+    exibeMessage(statusCode, titleMsg, textMsg) {
+
+      let errorOrSuccess;
+      let title;
+      let text;
+
+      if (statusCode == 200) {
+        title = titleMsg || "Tudo certo!";
+        text = textMsg || "";
+        errorOrSuccess = "success";
+      }
+
+      else if (statusCode == 201) {
+        title = titleMsg || "Registro Inserido!";
+        text = textMsg || "";
+        errorOrSuccess = "success";
+      }
+
+      else if (statusCode == 400) {
+        title = titleMsg || "Conexão interrompida";
+        text = textMsg ||
+          "A conexão do seu aparelho não está respondendo. Tente novamente.";
+        errorOrSuccess = "error";
+      }
+
+      else if (statusCode == 401 || statusCode == 403) {
+        title = titleMsg || "Sessão Inativa ou sem Permissão";
+        text = textMsg || "Você não está em uma sessão ativa (pode ter expirado) ou não tem permissão para executar essa ação. Clique em sair, e faça um novo login.";
+        errorOrSuccess = "error";
+      }
+
+      else if (statusCode == 404) {
+        title = titleMsg || "Paginão não encontrada";
+        text = textMsg ||
+          "A página de verificação foi alterada ou nã existe mais. Por favor, acione a administração.";
+        errorOrSuccess = "error";
+      }
+
+      else if (statusCode == 500) {
+        title = titleMsg || "Erro Interno";
+        text = textMsg ||
+          "Houve um error interno no servidor. Por favor, acione a administração.";
+        errorOrSuccess = "error";
+      }
+
+      else {
+        title = titleMsg || "Erro desconhecido";
+        text = textMsg ||
+          "Ocorreu um erro desconhecido no sistema. Tente novamente mais tarde.";
+        errorOrSuccess = "error";
+      }
+
+      if (errorOrSuccess == "success") {
+        this.$swal({
+          icon: 'success',
+          title: title,
+          text: text,
+          showConfirmButton: false,
+          timer: 2000
+        });
+      } else {
+        this.$swal({
+          icon: 'warning',
+          title: title,
+          text: text,
+          showCloseButton: false,
+          showConfirmButton: false,
+        });
+      }
     },
 
 
