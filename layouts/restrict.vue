@@ -9,6 +9,7 @@
       class="sm:invisible md:invisible lg:invisible xl:md:invisible"
     />
     <NavSidebar />
+    <!-- novo comentario -->
   </div>
 </template>
 
