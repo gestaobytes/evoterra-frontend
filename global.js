@@ -29,21 +29,6 @@ if (developmentMode == 'development') {
 export const urlApi = url;
 export const urlStorage = storage;
 
-// export function showError(e) {
-//   if (e && e.response && e.response.data) {
-//     var message = Object.values(e.response.data)
-//     Vue.toasted.global.defaultError({
-//       msg: message[0]
-//     })
-//   } else if (typeof e === 'string') {
-//     Vue.toasted.global.defaultError({
-//       msg: e
-//     })
-//   } else {
-//     Vue.toasted.global.defaultError()
-//   }
-// }
-
 export default {
   keyApplicationGB,
   configsApplication,
@@ -53,5 +38,4 @@ export default {
   keywords,
   urlApi,
   urlStorage,
-  // showError
 }
