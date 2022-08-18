@@ -1,12 +1,16 @@
 <template>
   <div :msg="messagesValidations">
-    <!-- @input="$emit('input', $event)" -->
+    <label
+      class="block text-xs py-1 -mb-2 leading-5"
+      :class="!messagesValidations.$error ? 'text-gray-600' : 'text-red-500'"
+    >
+      {{ label }}
+    </label>
     <input
       autofocus
       :value="value"
       @input="inputEvent"
       @blur="$emit('blur', $event)"
-      :placeholder="label"
       :type="defineType"
       :required="defineRequired"
       :label="label"
@@ -16,20 +20,37 @@
       :msgvalidate="messagesValidations"
       :error="messagesValidations.$error"
       :errordata="errordata"
-      :class="
-        'text-base border rounded font-medium leading-none py-3 w-full pl-3 mt-2 ' +
-        (!messagesValidations.$error
-          ? 'bg-gray-200 border-1 border-gray-900 text-gray-800'
-          : 'bg-red-50 hover:border-2 border-red-600 text-red-600')
+      :min="min"
+      :max="max"
+      :minlength="minlength"
+      :maxlength="maxlength"
+      class="
+        -z-10
+        rounded
+        font-medium
+        leading-none
+        w-full
+        py-2
+        pl-3
+        pr-3
+        mt-2
+        appearance-none
+        text-base
       "
-
-
+      :class="
+        !messagesValidations.$error
+          ? ' border-2 border-gray-300 text-gray-600 focus:outline-none focus:text-lime-900 focus:border-lime-400 focus:shadow-[0_0px_17px_-8px_rgba(0,0,0,0.3)] focus:shadow-lime-400'
+          : ' border-2 border-red-500 text-red-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0px_17px_-8px_rgba(0,0,0,0.3)] focus:shadow-red-500'
+      "
     />
-
-    <div class="text-xs text-red-500 mt-1" v-if="errordata || messagesValidations.$error">
+    <h6>{{errordata}}</h6>
+    <div
+      class="text-xs text-red-500 mt-1"
+      v-if="errordata || messagesValidations.$error"
+    >
       <p>
         <span v-if="errordata">{{ errordata[0] }} <br /></span>
-        <span v-if="!messagesValidations.required">Campo obrigatório. </span>
+        <span v-if="!messagesValidations.required">Obrigatório.</span>
 
         <span v-else-if="defineType == 'email' && !messagesValidations.email"
           >E-mail inválido.
@@ -55,6 +76,10 @@ export default {
   name: "FormTextField",
   props: [
     "messagesValidations",
+    "min",
+    "max",
+    "minlength",
+    "maxlength",
     "type",
     "nameField",
     "required",

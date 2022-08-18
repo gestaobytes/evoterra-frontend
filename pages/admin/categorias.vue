@@ -23,6 +23,8 @@
       </tr>
     </ViewCustomTable>
 
+    <Pagination />
+
     <ModalForm
       v-if="dialog"
       :title="titleModal"
@@ -30,24 +32,43 @@
       @save="save"
       :errorValidation="functionError()"
     >
-      <div slot="contentForm" class="grid grid-cols-12 gap-4 bg-green-50">
+      <!-- <div slot="contentForm" class="grid grid-cols-12 gap-4 bg-green-50"> -->
+      <div slot="contentForm" class="grid grid-cols-12 gap-4">
         <!-- <AlertError
             v-if="showError"
             :titleError="titleError"
             :textError="textError"
           /> -->
 
-        <div class="xs:col-span-12 sm:col-span-6 lg:col-span-10">
+        <div class="col-span-12 md:col-span-8 lg:col-span-10">
+        <!-- <div class="flex-auto"> -->
           <FormInput
             label="Categoria"
+            minlength="3"
+            maxlength="1000"
             nameField="name"
             v-model="dataOfTable.name"
             :messagesValidations="$v.dataOfTable.name"
             :errordata="msgErrors != [] ? msgErrors.name : null"
             @blur="$v.dataOfTable.name.$touch()"
           />
+          <h6>{{msgErrors}}</h6>
         </div>
-        <div class="xs:col-span-12 sm:col-span-6 lg:col-span-2">
+        <div class="col-span-12 md:col-span-4 lg:col-span-1">
+          <FormInput
+            label="Ordem"
+            min="0"
+            max="1000"
+            type="number"
+            nameField="order"
+            v-model="dataOfTable.order"
+            :messagesValidations="$v.dataOfTable.order"
+            :errordata="msgErrors != [] ? msgErrors.order : null"
+            @blur="$v.dataOfTable.order.$touch()"
+          />
+          <h6>{{msgErrors}}</h6>
+        </div>
+        <!-- <div class="col-span-12 md:col-span-12 lg:col-span-1">
           <FormInput
             label="Ordem"
             type="number"
@@ -57,7 +78,7 @@
             :errordata="msgErrors != [] ? msgErrors.order : null"
             @blur="$v.dataOfTable.order.$touch()"
           />
-        </div>
+        </div> -->
       </div>
     </ModalForm>
   </div>
@@ -74,10 +95,12 @@ import ModalForm from "@/components/layout/admin/ModalForm.vue";
 import ButtonAdd from "@/components/buttons/ButtonAdd.vue";
 import ButtonEdit from "@/components/buttons/ButtonEdit.vue";
 import ButtonDelete from "@/components/buttons/ButtonDelete.vue";
-import ViewCustomTable from "@/components/layout/admin/ViewCustomTable.vue";
+import ViewCustomTable from "@/components/utils/ViewCustomTable.vue";
+import Pagination from "@/components/utils/Pagination.vue";
 
 import FormInput from "@/components/forms/FormTextField.vue";
 import AlertError from "@/components/alerts/AlertError.vue";
+
 
 export default {
   name: "AdminCategories",
@@ -89,10 +112,12 @@ export default {
     ButtonDelete,
     ButtonEdit,
     ViewCustomTable,
+    Pagination,
     ModalForm,
     FormInput,
     AlertError,
-  },
+    Pagination
+},
   data() {
     return {
       titlePage: "Categorias",
@@ -103,8 +128,8 @@ export default {
   validations() {
     return {
       dataOfTable: {
-        name: { required, minLength: minLength(3), maxLength: maxLength(50) },
-        order: { required },
+        name: { required, minLength: minLength(3), maxLength: maxLength(1000) },
+        order: {  },
       },
     };
   },
