@@ -1,3 +1,4 @@
+import colors from 'vuetify/es5/util/colors'
 import axios from 'axios'
 const global = require('./global');
 
@@ -17,86 +18,86 @@ export default {
   head: {
     title: global.titlePage || '',
     meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: global.description || ''
-      }
+      charset: 'utf-8'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: global.description || ''
+    }
     ],
     link: [{
-        rel: 'apple-touch-icon',
-        sizes: '180x180',
-        type: 'image/x-icon',
-        href: '/images/favicons/apple-touch-icon.png'
-      },
-      {
-        rel: 'icon',
-        sizes: '32x32',
-        type: 'image/png',
-        href: '/images/favicons/favicon-32x32.png'
-      },
-      {
-        rel: 'icon',
-        sizes: '16x16',
-        type: 'image/png',
-        href: '/images/favicons/favicon-16x16.png'
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&display=swap"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/bootstrap.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/bootstrap-datepicker.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/vegas.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/animate.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/plugins/glightbox/glightbox.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/fontawesome-all.min.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/agrikol_iconl.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/style.css"
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/responsive.css"
-      }
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      type: 'image/x-icon',
+      href: '/images/favicons/apple-touch-icon.png'
+    },
+    {
+      rel: 'icon',
+      sizes: '32x32',
+      type: 'image/png',
+      href: '/images/favicons/favicon-32x32.png'
+    },
+    {
+      rel: 'icon',
+      sizes: '16x16',
+      type: 'image/png',
+      href: '/images/favicons/favicon-16x16.png'
+    },
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600&display=swap"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/bootstrap.min.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/bootstrap-datepicker.min.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/vegas.min.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/animate.min.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/plugins/glightbox/glightbox.min.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/fontawesome-all.min.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/agrikol_iconl.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/style.css"
+    },
+    {
+      rel: "stylesheet",
+      href: "/css/responsive.css"
+    }
     ],
 
     script: [{
-        src: "/plugins/glightbox/glightbox.min.js",
-        body: true
-      },
-      {
-        src: "/plugins/accordion/accordion.min.js",
-        body: true
-      }
+      src: "/plugins/glightbox/glightbox.min.js",
+      body: true
+    },
+    {
+      src: "/plugins/accordion/accordion.min.js",
+      body: true
+    }
     ]
   },
 
@@ -119,7 +120,7 @@ export default {
       src: 'plugins/owl.js',
       ssr: false
     },
-    
+
   ],
 
   modules: [
@@ -131,7 +132,7 @@ export default {
   ],
 
   router: {
-    middleware: ['clearValidationErrors','closeDrawer']
+    middleware: ['clearValidationErrors', 'closeDrawer']
   },
 
   components: true,
@@ -173,10 +174,40 @@ export default {
 
   buildModules: [
     '@nuxt/postcss8',
+    '@nuxtjs/vuetify',
   ],
+
+  vuetify: {
+    customVariables: ['~/assets/_variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        dark: {
+          primary: colors.purple.darken3,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        },
+        light: {
+          primary: colors.purple.darken3,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        },
+      }
+    }
+  },
+
   build: {
     extractCSS: true,
-    extend(config, ctx) {},
+    transpile: ['vuetify/lib'],
+    extend(config, ctx) { },
 
     postcss: {
       plugins: {

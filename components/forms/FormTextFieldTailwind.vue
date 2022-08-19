@@ -1,29 +1,29 @@
 <template>
   <div :msg="messagesValidations">
-    <v-text-field
+    <label
+      class="block text-xs py-1 -mb-2 leading-5"
+      :class="!messagesValidations.$error ? 'text-gray-600' : 'text-red-500'"
+    >
+      {{ label }}
+    </label>
+    <input
       :value="value"
-      @input="$emit('input', $event)"
-      @blur="$emit('blur', $event, (blurField = true))"
+      @input="inputEvent"
+      @blur="$emit('blur', $event)"
       :type="defineType"
+      :required="defineRequired"
       :label="label"
-      :outlined="defineOutlined"
-      class="bg-green-200"
-      color="green"
-      :dense="defineDense"
       :disabled="defineDisabled"
-      :append-icon="
-        messagesValidations.$error
-          ? 'mdi-alert-circle'
-          : blurField
-          ? 'mdi-check-circle'
-          : ''
-      "
+      :append-icon="messagesValidations.$error ? 'mdi-alert-circle' : ''"
       :validate="messagesValidations.$error"
       :msgvalidate="messagesValidations"
       :error="messagesValidations.$error"
       :errordata="errordata"
-    />
-      <!-- class="
+      :min="min"
+      :max="max"
+      :minlength="minlength"
+      :maxlength="maxlength"
+      class="
         rounded
         font-medium
         leading-none
@@ -39,14 +39,17 @@
         !messagesValidations.$error
           ? ' border-2 border-gray-300 text-gray-600 focus:outline-none focus:text-lime-900 focus:border-lime-400 focus:shadow-[0_0px_17px_-8px_rgba(0,0,0,0.3)] focus:shadow-lime-400'
           : ' border-2 border-red-500 text-red-500 focus:outline-none focus:border-red-500 focus:shadow-[0_0px_17px_-8px_rgba(0,0,0,0.3)] focus:shadow-red-500'
-      " -->
-
-    <h5>{{ blurField }}</h5>
-
-    <div class="hint-text-error" v-if="errordata || messagesValidations.$error">
+      "
+    />
+    <h6>{{errordata}}</h6>
+    <div
+      class="text-xs text-red-500 mt-1"
+      v-if="errordata || messagesValidations.$error"
+    >
       <p>
         <span v-if="errordata">{{ errordata[0] }} <br /></span>
-        <span v-if="!messagesValidations.required">Campo obrigatório. </span>
+        <span v-if="!messagesValidations.required">Obrigatório.</span>
+
         <span v-else-if="defineType == 'email' && !messagesValidations.email"
           >E-mail inválido.
         </span>
@@ -58,11 +61,9 @@
           <span v-if="defineType == 'text'">caracteres</span>
         </span>
         <span v-else-if="!messagesValidations.maxLength"
-          >Máx {{ messagesValidations.$params.maxLengt.max }}
+          >Máx {{ messagesValidations.$params.maxLengt }}
           <span v-if="defineType == 'text'">caracteres</span>
         </span>
-        <!-- <span v-else-if="!messagesValidations.minValue">Valor mín. {{ messagesValidations.$params.minValue.min }}  </span>
-          <span v-else-if="!messagesValidations.maxValue">Valor máx. {{ messagesValidations.$params.maxValue.max }}  </span> -->
       </p>
     </div>
   </div>
@@ -73,68 +74,34 @@ export default {
   name: "FormTextField",
   props: [
     "messagesValidations",
+    "min",
+    "max",
+    "minlength",
+    "maxlength",
     "type",
     "nameField",
+    "required",
     "label",
     "value",
     "validate",
     "msgvalidate",
     "errordata",
   ],
-  data() {
-    return {
-      blurField: false,
-    };
-  },
   computed: {
     defineType: function () {
       return this.type || "text";
     },
-    defineOutlined: function () {
-      return this.outlined || true;
-    },
-    defineDense: function () {
-      return this.dense || true;
-    },
     defineRequired: function () {
       return this.required || false;
-    },
-    defineCounter: function () {
-      return this.counter || false;
     },
     defineDisabled: function () {
       return this.disabled || false;
     },
   },
+  methods: {
+    inputEvent(e) {
+      this.$emit("input", e.target.value);
+    },
+  },
 };
 </script>
-
-<style scoped>
-.complement {
-  padding: 10px;
-  margin-top: -8px;
-  font-weight: 300;
-  margin-left: -13px;
-  z-index: 5;
-  background-color: #006e80;
-  color: white;
-  height: 40px;
-}
-.complement-error {
-  padding: 10px;
-  margin-top: -9px;
-  font-weight: 300;
-  margin-left: -13px;
-  z-index: 5;
-  background-color: #dd2c00;
-  color: white;
-  height: 41px;
-}
-.hint-text-error {
-  font-size: 0.5em;
-}
-.hint-text {
-  font-size: 0.7em;
-  font-weight: 300;
-}
-</style>

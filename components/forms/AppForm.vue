@@ -5,7 +5,7 @@
         <table width="100%">
           <tr>
             <td>
-              <h2 style="color:lightseagreen" class="mt-4 title text-uppercase">
+              <h2 style='color:lightseagreen' class="mt-4 title text-uppercase">
                 {{ title }}
               </h2>
             </td>

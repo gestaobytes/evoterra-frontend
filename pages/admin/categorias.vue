@@ -8,6 +8,33 @@
 
     <ButtonAdd @add="reset(), openModal(), $v.dataOfTable.$reset()" />
 
+    <div class="col-span-12 md:col-span-8 lg:col-span-10">
+      <!-- <div class="flex-auto"> -->
+      <FormInput
+        label="Categoria"
+        nameField="name"
+        v-model="dataOfTable.name"
+        :messagesValidations="$v.dataOfTable.name"
+        :errordata="msgErrors != [] ? msgErrors.name : null"
+        @blur="$v.dataOfTable.name.$touch()"
+      />
+      <h6>{{ msgErrors }}</h6>
+    </div>
+    <div class="col-span-12 md:col-span-4 lg:col-span-1">
+      <FormInput
+        label="Ordem"
+        min="0"
+        max="1000"
+        type="number"
+        nameField="order"
+        v-model="dataOfTable.order"
+        :messagesValidations="$v.dataOfTable.order"
+        :errordata="msgErrors != [] ? msgErrors.order : null"
+        @blur="$v.dataOfTable.order.$touch()"
+      />
+      <h6>{{ msgErrors }}</h6>
+    </div>
+
     <ViewCustomTable :headTH="tableHead" :registers="registersOfTable">
       <tr
         v-for="data in registersOfTable"
@@ -16,14 +43,34 @@
       >
         <td>{{ data.name }}</td>
         <td width="50px" class="text-center">{{ data.order }}</td>
-        <td width="90px" class="text-right">
-          <ButtonDelete @delete="remove(data)" />
-          <ButtonEdit @save="loadRegisterSelect(data), (dialog = !dialog)" />
+        <td class="text-right">
+          <OpenButtons>
+            <div class="flex -mr-4" slot="buttons-edit">
+              <ButtonDelete @delete="remove(data)" />
+              <ButtonEdit
+                @save="loadRegisterSelect(data), (dialog = !dialog)"
+              />
+            </div>
+          </OpenButtons>
         </td>
       </tr>
     </ViewCustomTable>
 
-    <Pagination />
+    <CustomPagination
+      :page="page"
+      :paginate="paginate"
+      :count="count"
+      v-if="paginate > 1"
+    >
+      <div slot="pagination">
+        <v-pagination
+          color="#00688B"
+          v-model="page"
+          :length="paginate"
+          :total-visible="7"
+        />
+      </div>
+    </CustomPagination>
 
     <ModalForm
       v-if="dialog"
@@ -41,18 +88,16 @@
           /> -->
 
         <div class="col-span-12 md:col-span-8 lg:col-span-10">
-        <!-- <div class="flex-auto"> -->
+          <!-- <div class="flex-auto"> -->
           <FormInput
             label="Categoria"
-            minlength="3"
-            maxlength="1000"
             nameField="name"
             v-model="dataOfTable.name"
             :messagesValidations="$v.dataOfTable.name"
             :errordata="msgErrors != [] ? msgErrors.name : null"
             @blur="$v.dataOfTable.name.$touch()"
           />
-          <h6>{{msgErrors}}</h6>
+          <h6>{{ msgErrors }}</h6>
         </div>
         <div class="col-span-12 md:col-span-4 lg:col-span-1">
           <FormInput
@@ -66,7 +111,7 @@
             :errordata="msgErrors != [] ? msgErrors.order : null"
             @blur="$v.dataOfTable.order.$touch()"
           />
-          <h6>{{msgErrors}}</h6>
+          <h6>{{ msgErrors }}</h6>
         </div>
         <!-- <div class="col-span-12 md:col-span-12 lg:col-span-1">
           <FormInput
@@ -96,11 +141,11 @@ import ButtonAdd from "@/components/buttons/ButtonAdd.vue";
 import ButtonEdit from "@/components/buttons/ButtonEdit.vue";
 import ButtonDelete from "@/components/buttons/ButtonDelete.vue";
 import ViewCustomTable from "@/components/utils/ViewCustomTable.vue";
-import Pagination from "@/components/utils/Pagination.vue";
+import OpenButtons from "@/components/utils/OpenButtons.vue";
+import CustomPagination from "@/components/utils/CustomPagination.vue";
 
 import FormInput from "@/components/forms/FormTextField.vue";
 import AlertError from "@/components/alerts/AlertError.vue";
-
 
 export default {
   name: "AdminCategories",
@@ -112,12 +157,12 @@ export default {
     ButtonDelete,
     ButtonEdit,
     ViewCustomTable,
-    Pagination,
+    OpenButtons,
+    CustomPagination,
     ModalForm,
     FormInput,
     AlertError,
-    Pagination
-},
+  },
   data() {
     return {
       titlePage: "Categorias",
@@ -129,7 +174,7 @@ export default {
     return {
       dataOfTable: {
         name: { required, minLength: minLength(3), maxLength: maxLength(1000) },
-        order: {  },
+        order: {},
       },
     };
   },

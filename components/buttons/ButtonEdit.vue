@@ -1,10 +1,10 @@
 <template>
   <button @click="$emit('save')"
-    class="inline-block rounded-full border-[0.05rem] border-lime-500 text-lime-500 text-xs leading-normal 
-    hover:bg-[#303F06] hover:text-white 
-    focus:bg-[#303F06] focus:text-white focus:outline-none focus:ring-0 
-    active:bg-lime-700 active:text-white transition duration-150 ease-in-out w-7 h-7">
-    <i class="fa fa-pen"></i>
+    class="bg-lime-700 rounded text-white text-sm l w-auto h-auto flex px-2 py-1 leading-normal font-medium ml-2
+    hover:bg-[#303F06]
+    focus:bg-[#303F06] 
+    active:bg-lime-700 transition duration-150 ease-in-out">
+    EDITAR
   </button>
 </template>
 
